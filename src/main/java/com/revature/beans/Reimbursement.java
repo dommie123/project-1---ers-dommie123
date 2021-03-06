@@ -5,14 +5,14 @@ import java.time.LocalDateTime;
 
 public class Reimbursement implements Serializable {
 
-	private static enum ReimbursementType {
+	public static enum ReimbursementType {
 		LODGING,
 		TRAVEL,
 		FOOD,
 		OTHER
 	}
 	
-	private static enum ReimbursementStatus {
+	public static enum ReimbursementStatus {
 		PENDING, 
 		APPROVED,
 		DENIED
