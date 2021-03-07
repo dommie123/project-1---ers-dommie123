@@ -11,6 +11,11 @@ public class User implements Serializable {
 	/**
 	 * 
 	 */
+	public static enum UserRole {
+		EMPLOYEE,
+		MANAGER
+	};
+	
 	private static final long serialVersionUID = -8245591262053866756L;
 	private int id;
 	private String firstName;
@@ -18,10 +23,11 @@ public class User implements Serializable {
 	private String userName;
 	private String password;
 	private String email;
+	private UserRole role;
 	private List<Reimbursement> reimbursements;
 	
 	// All-Args Constructor
-	public User(int id, String firstName, String lastName, String userName, String password, String email) {
+	public User(int id, String firstName, String lastName, String userName, String password, String email, UserRole role) {
 		super();
 		this.id = id;
 		this.firstName = firstName;
@@ -29,9 +35,10 @@ public class User implements Serializable {
 		this.userName = userName;
 		this.password = password;
 		this.email = email;
+		this.role = role;
 		this.reimbursements = new ArrayList<>();
 	}
-	
+
 	// No-Args Constructor
 	public User() {
 		super();
@@ -85,4 +92,11 @@ public class User implements Serializable {
 		this.email = email;
 	}
 	
+	public UserRole getRole() {
+		return role;
+	}
+
+	public void setRole(UserRole role) {
+		this.role = role;
+	}
 }
