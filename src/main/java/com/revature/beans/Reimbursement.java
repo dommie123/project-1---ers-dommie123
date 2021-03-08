@@ -101,12 +101,20 @@ public class Reimbursement implements Serializable {
 		return submitted;
 	}
 	
+	public void setSubmitted() {
+		this.setSubmitted(LocalDateTime.now());
+	}
+	
 	public void setSubmitted(LocalDateTime submitted) {
 		this.submitted = submitted;
 	}
 	
 	public LocalDateTime getResolved() {
 		return resolved;
+	}
+	
+	public void setResolved() {
+		this.setResolved(LocalDateTime.now());
 	}
 	
 	public void setResolved(LocalDateTime resolved) {

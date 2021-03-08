@@ -31,7 +31,7 @@ public class ReimbDaoDB implements ReimbursementDao {
 	@Override
 	public void addReimbursement(Reimbursement reimb) {
 		if (conn == null) return;
-		String query = "{? = call addReimbursement(?, ?, ?, ?, ?, ?, ?, ?, ?)};";
+		String query = "{? = call addReimbursement(?, ?, ?, ?, ?, ?, ?, ?, ?)}";
 		try (CallableStatement stmt = conn.prepareCall(query)) {
 			conn.setAutoCommit(false);
 			stmt.registerOutParameter(1, Types.OTHER);
@@ -74,7 +74,7 @@ public class ReimbDaoDB implements ReimbursementDao {
 	@Override
 	public Reimbursement getReimbursementById(int reimbid) {
 		if (conn == null) return null;
-		String query = "SELECT * FROM ers_reimbursement WHERE reimb_id = ?;";
+		String query = "SELECT * FROM ers_reimbursement WHERE reimb_id = ?";
 		try (PreparedStatement stmt = conn.prepareStatement(query)) {
 			stmt.setInt(1, reimbid);
 			ResultSet rs = stmt.executeQuery();
@@ -223,7 +223,7 @@ public class ReimbDaoDB implements ReimbursementDao {
 		String query = "UPDATE ers_reimbursements SET reimb_amount = ?,"
 				+ " reimb_submitted = ?, reimb_resolved = ?, reimb_description = ?,"
 				+ " reimb_receipt = ?, reimb_author = ?, reimb_resolver = ?, "
-				+ "reimb_status_id = ?, reimb_type_id = ? WHERE reimb_id = ?;";
+				+ "reimb_status_id = ?, reimb_type_id = ? WHERE reimb_id = ?";
 		try (PreparedStatement stmt = conn.prepareStatement(query)) {
 			stmt.setDouble(1, reimb.getAmount());
 			
@@ -265,7 +265,7 @@ public class ReimbDaoDB implements ReimbursementDao {
 	@Override
 	public boolean deleteReimbursement(Reimbursement reimb) {
 		if (conn == null) return false;
-		String query = "DELETE FROM ers_reimbursement WHERE id = ?;";
+		String query = "DELETE FROM ers_reimbursement WHERE id = ?";
 		try (PreparedStatement stmt = conn.prepareStatement(query)) {
 			stmt.setInt(1, reimb.getId());
 			return stmt.execute() || stmt.getUpdateCount() > 0;
