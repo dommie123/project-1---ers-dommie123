@@ -26,24 +26,25 @@ public class UserDaoDB implements UserDao {
 	@Override
 	public void addUser(User u) {
 		if (conn == null) return;
-		String query = "{? = call addUser(?, ?, ?, ?, ?, ?};";
+		String query = "{? = call addUser(?, ?, ?, ?, ?, ?, ?)}";
 		try (CallableStatement stmt = conn.prepareCall(query)) {
-			stmt.registerOutParameter(1, Types.OTHER);
-			stmt.setString(2, u.getFirstName());
-			stmt.setString(3, u.getLastName());
-			stmt.setString(4, u.getUserName());
-			stmt.setString(5, u.getPassword());
+			stmt.registerOutParameter(1, Types.VARCHAR);
+			stmt.setInt(2, this.getAllUsers().size() + 1);
+			stmt.setString(3, u.getUserName());
+			stmt.setString(4, u.getPassword());
+			stmt.setString(5, u.getFirstName());
+			stmt.setString(6, u.getLastName());
 			stmt.setString(7, u.getEmail());
 			
 			if (u.getRole().equals(UserRole.EMPLOYEE))
-				stmt.setInt(8, 0);
-			else if (u.getRole().equals(UserRole.MANAGER))
 				stmt.setInt(8, 1);
+			else if (u.getRole().equals(UserRole.MANAGER))
+				stmt.setInt(8, 2);
 			
 			stmt.execute();
 		} catch (SQLException e) {
 			logger.log(Level.ERROR, "Query Failed to Execute! Please fix this immediately!");
-			e.getLocalizedMessage();
+			System.out.println(e.getLocalizedMessage());
 		}
 	}
 
@@ -59,22 +60,22 @@ public class UserDaoDB implements UserDao {
 				User u = new User();
 				
 				u.setId(rs.getInt(1));
-				u.setFirstName(rs.getString(2));
-				u.setLastName(rs.getString(3));
-				u.setUserName(rs.getString(4));
-				u.setPassword(rs.getString(5));
+				u.setUserName(rs.getString(2));
+				u.setPassword(rs.getString(3));
+				u.setFirstName(rs.getString(4));
+				u.setLastName(rs.getString(5));
 				u.setEmail(rs.getString(6));
 				
-				if (rs.getInt(7) == 0)
+				if (rs.getInt(7) == 1)
 					u.setRole(UserRole.EMPLOYEE);
-				else if (rs.getInt(7) == 1)
+				else if (rs.getInt(7) == 2)
 					u.setRole(UserRole.MANAGER);
 				
 				users.add(u);
 			}
 		} catch (SQLException e) {
 			logger.log(Level.ERROR, "Query Failed to Execute! Please fix this immediately!");
-			e.getLocalizedMessage();
+			System.out.println(e.getLocalizedMessage());
 		}
 		return users;
 	}
@@ -90,21 +91,21 @@ public class UserDaoDB implements UserDao {
 			
 			while (rs.next()) {
 				u.setId(rs.getInt(1));
-				u.setFirstName(rs.getString(2));
-				u.setLastName(rs.getString(3));
-				u.setUserName(rs.getString(4));
-				u.setPassword(rs.getString(5));
+				u.setUserName(rs.getString(2));
+				u.setPassword(rs.getString(3));
+				u.setFirstName(rs.getString(4));
+				u.setLastName(rs.getString(5));
 				u.setEmail(rs.getString(6));
 				
-				if (rs.getInt(7) == 0)
+				if (rs.getInt(7) == 1)
 					u.setRole(UserRole.EMPLOYEE);
-				else if (rs.getInt(7) == 1)
+				else if (rs.getInt(7) == 2)
 					u.setRole(UserRole.MANAGER);
 			}
 			return u;
 		} catch (SQLException e) {
 			logger.log(Level.ERROR, "Query Failed to Execute! Please fix this immediately!");
-			e.getLocalizedMessage();
+			System.out.println(e.getLocalizedMessage());
 		}
 		return null;
 	}
@@ -112,7 +113,7 @@ public class UserDaoDB implements UserDao {
 	@Override
 	public User getUserByCredentials(String username, String password) {
 		if (conn == null) return null;
-		String query = "SELECT * FROM ers_users WHERE ers_username = ? AND ers_password = ?;";
+		String query = "SELECT * FROM ers_users WHERE ers_username = ? AND ers_pass = ?;";
 		try (PreparedStatement stmt = conn.prepareStatement(query)) {
 			stmt.setString(1, username);
 			stmt.setString(2, password);
@@ -121,21 +122,21 @@ public class UserDaoDB implements UserDao {
 			
 			while (rs.next()) {
 				u.setId(rs.getInt(1));
-				u.setFirstName(rs.getString(2));
-				u.setLastName(rs.getString(3));
-				u.setUserName(rs.getString(4));
-				u.setPassword(rs.getString(5));
+				u.setUserName(rs.getString(2));
+				u.setPassword(rs.getString(3));
+				u.setFirstName(rs.getString(4));
+				u.setLastName(rs.getString(5));
 				u.setEmail(rs.getString(6));
 				
-				if (rs.getInt(7) == 0)
+				if (rs.getInt(7) == 1)
 					u.setRole(UserRole.EMPLOYEE);
-				else if (rs.getInt(7) == 1)
+				else if (rs.getInt(7) == 2)
 					u.setRole(UserRole.MANAGER);
 			}
 			return u;
 		} catch (SQLException e) {
 			logger.log(Level.ERROR, "Query Failed to Execute! Please fix this immediately!");
-			e.getLocalizedMessage();
+			System.out.println(e.getLocalizedMessage());
 		}
 		return null;
 	}
@@ -143,7 +144,7 @@ public class UserDaoDB implements UserDao {
 	@Override
 	public void updateUser(User u) {
 		if (conn == null) return;
-		String query = "UPDATE ers_users SET ers_username = ?, ers_password = ?, "
+		String query = "UPDATE ers_users SET ers_username = ?, ers_pass = ?, "
 				+ "user_first_name = ?, user_last_name = ?, user_email = ?, user_role_id = ?"
 				+ " WHERE ers_users_id = ?;";
 		try (PreparedStatement stmt = conn.prepareStatement(query)) {
@@ -154,29 +155,16 @@ public class UserDaoDB implements UserDao {
 			stmt.setString(5, u.getEmail());
 			
 			if (u.getRole().equals(UserRole.EMPLOYEE))
-				stmt.setInt(6, 0);
-			else if (u.getRole().equals(UserRole.MANAGER))
 				stmt.setInt(6, 1);
+			else if (u.getRole().equals(UserRole.MANAGER))
+				stmt.setInt(6, 2);
 			
 			stmt.setInt(7, u.getId());
-			ResultSet rs = stmt.executeQuery();
+			stmt.execute();
 			
-			while (rs.next()) {
-				u.setId(rs.getInt(1));
-				u.setFirstName(rs.getString(2));
-				u.setLastName(rs.getString(3));
-				u.setUserName(rs.getString(4));
-				u.setPassword(rs.getString(5));
-				u.setEmail(rs.getString(6));
-				
-				if (rs.getInt(7) == 0)
-					u.setRole(UserRole.EMPLOYEE);
-				else if (rs.getInt(7) == 1)
-					u.setRole(UserRole.MANAGER);
-			}
 		} catch (SQLException e) {
 			logger.log(Level.ERROR, "Query Failed to Execute! Please fix this immediately!");
-			e.getLocalizedMessage();
+			System.out.println(e.getLocalizedMessage());
 		}
 	}
 
@@ -190,7 +178,7 @@ public class UserDaoDB implements UserDao {
 			return stmt.execute() || stmt.getUpdateCount() > 0;
 		} catch (SQLException e) {
 			logger.log(Level.ERROR, "Query Failed to Execute! Please fix this immediately!");
-			e.getLocalizedMessage();
+			System.out.println(e.getLocalizedMessage());
 		}
 		return false;
 	}
