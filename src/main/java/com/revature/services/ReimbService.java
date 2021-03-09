@@ -14,6 +14,10 @@ public class ReimbService {
 	
 	private ReimbursementDao rDao;
 	
+	public ReimbService(ReimbursementDao reimbDao) {
+		rDao = reimbDao;
+	}
+	
 	public ReimbService() {
 		rDao = new ReimbDaoDB();
 	}

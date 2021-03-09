@@ -100,6 +100,14 @@ public class User implements Serializable {
 		this.role = role;
 	}
 	
+	public List<Reimbursement> getReimbursements() {
+		return reimbursements;
+	}
+
+	public void setReimbursements(List<Reimbursement> reimbursements) {
+		this.reimbursements = reimbursements;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;

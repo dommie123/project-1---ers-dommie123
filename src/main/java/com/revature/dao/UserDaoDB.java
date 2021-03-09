@@ -26,20 +26,20 @@ public class UserDaoDB implements UserDao {
 	@Override
 	public void addUser(User u) {
 		if (conn == null) return;
-		String query = "{? = call addUser(?, ?, ?, ?, ?, ?, ?)}";
+		String query = "{call addUser(?, ?, ?, ?, ?, ?, ?)}";
 		try (CallableStatement stmt = conn.prepareCall(query)) {
-			stmt.registerOutParameter(1, Types.VARCHAR);
-			stmt.setInt(2, this.getAllUsers().size() + 1);
-			stmt.setString(3, u.getUserName());
-			stmt.setString(4, u.getPassword());
-			stmt.setString(5, u.getFirstName());
-			stmt.setString(6, u.getLastName());
-			stmt.setString(7, u.getEmail());
+			//stmt.registerOutParameter(1, Types.VARCHAR);
+			stmt.setInt(1, this.getAllUsers().size() + 1);
+			stmt.setString(2, u.getUserName());
+			stmt.setString(3, u.getPassword());
+			stmt.setString(4, u.getFirstName());
+			stmt.setString(5, u.getLastName());
+			stmt.setString(6, u.getEmail());
 			
 			if (u.getRole().equals(UserRole.EMPLOYEE))
-				stmt.setInt(8, 1);
+				stmt.setInt(7, 1);
 			else if (u.getRole().equals(UserRole.MANAGER))
-				stmt.setInt(8, 2);
+				stmt.setInt(7, 2);
 			
 			stmt.execute();
 		} catch (SQLException e) {
@@ -101,6 +101,9 @@ public class UserDaoDB implements UserDao {
 					u.setRole(UserRole.EMPLOYEE);
 				else if (rs.getInt(7) == 2)
 					u.setRole(UserRole.MANAGER);
+				
+				if (u.getReimbursements() == null)
+					u.setReimbursements(new ArrayList<>());
 			}
 			return u;
 		} catch (SQLException e) {
@@ -132,6 +135,9 @@ public class UserDaoDB implements UserDao {
 					u.setRole(UserRole.EMPLOYEE);
 				else if (rs.getInt(7) == 2)
 					u.setRole(UserRole.MANAGER);
+				
+				if (u.getReimbursements() == null)
+					u.setReimbursements(new ArrayList<>());
 			}
 			return u;
 		} catch (SQLException e) {
