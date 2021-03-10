@@ -15,20 +15,24 @@ public class UserService {
 		uDao = new UserDaoDB();
 	}
 	
-	public void login(String username, String password) throws InvalidCredentialsException {
+	public boolean login(String username, String password) throws InvalidCredentialsException {
 		if (uDao.getUserByCredentials(username, password).getId() == 0) {
 			throw new InvalidCredentialsException();
 		}
 		else {
 			SessionCache.setCurrentUser(uDao.getUserByCredentials(username, password));
+			return true;
 		}
+		
 	}
 	
-	public void register(User u) throws UsernameAlreadyExistsException {
+	public boolean register(User u) throws UsernameAlreadyExistsException {
 		if (uDao.getUserByCredentials(u.getUserName(), u.getPassword()).getUserName() != null)
 			throw new UsernameAlreadyExistsException();
-		else
+		else {
 			uDao.addUser(u);
+			return true;
+		}
 	}
 	
 }

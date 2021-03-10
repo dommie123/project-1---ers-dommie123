@@ -2,10 +2,12 @@ package com.revature.controllers;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.revature.dao.UserDao;
+import com.revature.services.UserService;
 import com.revature.utils.SessionCache;
 
 public class LoginController {
+	
+	private static UserService uServ;
 
 	public static String login(HttpServletRequest req) {
 		if (!req.getMethod().equals("POST")) {
@@ -14,12 +16,11 @@ public class LoginController {
 		String username = req.getParameter("username");
 		String password = req.getParameter("password");
 		
-		if (!(username.equals(SessionCache.getCurrentUser().get().getUserName()) && password.equals(SessionCache.getCurrentUser().get().getPassword()))) {
-			return "wrongcreds.ers";
-		}
+		if (!uServ.login(username, password)) {
+			return "badcreds.ers";
+		}	
 		else {
-			req.getSession().setAttribute("loggedusername", username);
-			req.getSession().setAttribute("loggedpass", password);
+			req.getSession().setAttribute("currentuser", SessionCache.getCurrentUser().get());
 			return "home.ers";
 		}
 	}
