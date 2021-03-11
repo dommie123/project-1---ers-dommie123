@@ -7,11 +7,11 @@ import com.revature.services.UserService;
 
 public class RegisterController {
 	
-	private static UserService uServ;
+	private static UserService uServ = new UserService();
 	
 	public static String register(HttpServletRequest req) {
 		if (!req.getMethod().equals("POST"))
-			return "resources/html/index.html";
+			return "index.html";
 		
 		User newUser = new User();
 		newUser.setFirstName(req.getParameter("firstname"));
@@ -19,11 +19,11 @@ public class RegisterController {
 		newUser.setEmail(req.getParameter("email"));
 		newUser.setUserName(req.getParameter("username"));
 		
-		if (req.getParameter("password").equals(req.getParameter("confirmpassword")))
+		if (req.getParameter("password").equals(req.getParameter("confirmpass")))
 			newUser.setPassword(req.getParameter("firstname"));
 		else {
 			System.out.println("Passwords do not match! Redirectimg to registration");
-			return "resources/html/register.html";
+			return "register.html";
 		}
 		
 		if (uServ.register(newUser)) {
@@ -32,9 +32,7 @@ public class RegisterController {
 		}
 		else {
 			System.out.println("Failed to register user! Redirecting to login...");
-			return "resources/html/index.html";
+			return "index.html";
 		}
-		
 	}
-	
 }

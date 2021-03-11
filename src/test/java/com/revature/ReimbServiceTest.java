@@ -23,6 +23,7 @@ import com.revature.dao.UserDao;
 import com.revature.dao.UserDaoDB;
 import com.revature.exceptions.UnauthorizedException;
 import com.revature.services.ReimbService;
+import com.revature.utils.DaoUtil;
 import com.revature.utils.SessionCache;
 /**
  * This is the test case file for testing methods that deal with reimbursement
@@ -45,9 +46,9 @@ public class ReimbServiceTest {
 	
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-		userDao = new UserDaoDB();
-		reimbDao = new ReimbDaoDB();
-		rServ = new ReimbService(reimbDao);
+		userDao = DaoUtil.getUserDao();
+		reimbDao = DaoUtil.getReimbDao();
+		rServ = new ReimbService();
 		u1 = new User(1, "testuser", "password", "testFirst", "testLast", "test@example.com", UserRole.EMPLOYEE);
 		u2 = new User(1, "testuser2", "password", "testFirst2", "testLast2", "test2@example.com", UserRole.EMPLOYEE);
 		m = new User(2, "testman", "pass", "manFirst", "manLast", "manager@example.com", UserRole.MANAGER);

@@ -10,13 +10,13 @@ public class UserRequestHelper {
 	public static String process(HttpServletRequest req) {
 		System.out.println(req.getRequestURI());
 		switch (req.getRequestURI()) {
-		case "login.ers": 
+		case "/project1/resources/html/login.ers": 
 			System.out.println("In login.change rhelper");
 			return LoginController.login(req);
-		case "home.ers":
+		case "/project1/resources/html/home.ers":
 			System.out.println("In home.change rhelper");
 			return HomeController.home(req);
-		case "register.ers":
+		case "/project1/resources/html/register.ers":
 			System.out.println("In register.ers rhelper");
 			return RegisterController.register(req);
 		default: 

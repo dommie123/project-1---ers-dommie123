@@ -12,11 +12,12 @@ public class UserService {
 	private UserDao uDao;
 	
 	public UserService() {
-		uDao = new UserDaoDB();
+		uDao = DaoUtil.getUserDao();
 	}
 	
 	public boolean login(String username, String password) throws InvalidCredentialsException {
-		if (uDao.getUserByCredentials(username, password).getId() == 0) {
+		User current = uDao.getUserByCredentials(username, password);
+		if (current == null || current.getId() == 0) {
 			throw new InvalidCredentialsException();
 		}
 		else {
@@ -27,7 +28,7 @@ public class UserService {
 	}
 	
 	public boolean register(User u) throws UsernameAlreadyExistsException {
-		if (uDao.getUserByCredentials(u.getUserName(), u.getPassword()).getUserName() != null)
+		if (uDao.getUserByCredentials(u.getUserName(), u.getPassword()).getUserName() != null && u != null)
 			throw new UsernameAlreadyExistsException();
 		else {
 			uDao.addUser(u);

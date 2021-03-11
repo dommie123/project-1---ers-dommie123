@@ -4,6 +4,7 @@ import com.revature.beans.Reimbursement;
 import com.revature.dao.ReimbDaoDB;
 import com.revature.dao.ReimbursementDao;
 import com.revature.exceptions.UnauthorizedException;
+import com.revature.utils.DaoUtil;
 import com.revature.utils.SessionCache;
 
 import com.revature.beans.User;
@@ -14,12 +15,8 @@ public class ReimbService {
 	
 	private ReimbursementDao rDao;
 	
-	public ReimbService(ReimbursementDao reimbDao) {
-		rDao = reimbDao;
-	}
-	
 	public ReimbService() {
-		rDao = new ReimbDaoDB();
+		rDao = DaoUtil.getReimbDao();
 	}
 	
 	public void submitTicket(Reimbursement reimb) {
