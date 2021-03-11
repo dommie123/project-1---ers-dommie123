@@ -24,7 +24,7 @@ public class ConnectionUtil {
 		// Read database.properties file
 		ClassLoader classLoader = getClass().getClassLoader();
 		InputStream is = classLoader.getResourceAsStream("database.properties");
-		logger.log(Level.INFO, is.toString());
+		//logger.log(Level.INFO, is.toString());
 		
 		try {
 			p.load(is);
