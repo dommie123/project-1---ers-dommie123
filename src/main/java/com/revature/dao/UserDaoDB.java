@@ -19,8 +19,8 @@ import com.revature.utils.ConnectionUtil;
 
 public class UserDaoDB implements UserDao {
 
-	private static ConnectionUtil connUtil = ConnectionUtil.getConnectionUtil();
-	private static Connection conn = connUtil.getConnection();
+	private ConnectionUtil connUtil = ConnectionUtil.getConnectionUtil();
+	private Connection conn = connUtil.getConnection();
 	private static final Logger logger = Logger.getLogger(UserDaoDB.class);
 	
 	@Override
@@ -187,6 +187,11 @@ public class UserDaoDB implements UserDao {
 			System.out.println(e.getLocalizedMessage());
 		}
 		return false;
+	}
+	
+	// This is a temporary method for the purpose of debugging
+	public void setConnection(Connection conn) {
+		this.conn = conn;
 	}
 
 }

@@ -1,5 +1,12 @@
 package com.revature.services;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
+//import java.sql.Connection;
+//import java.sql.DriverManager;
+
 import com.revature.beans.User;
 import com.revature.dao.UserDao;
 import com.revature.dao.UserDaoDB;
@@ -9,10 +16,10 @@ import com.revature.utils.*;
 
 public class UserService {
 	
-	private UserDao uDao;
+	private UserDaoDB uDao;
 	
 	public UserService() {
-		uDao = DaoUtil.getUserDao();
+		uDao = (UserDaoDB) DaoUtil.getUserDao();
 	}
 	
 	public boolean login(String username, String password) throws InvalidCredentialsException {
