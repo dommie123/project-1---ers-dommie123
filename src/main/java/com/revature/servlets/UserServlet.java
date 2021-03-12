@@ -23,7 +23,7 @@ public class UserServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		request.getRequestDispatcher(UserRequestHelper.process(request)).forward(request, response);
+		request.getRequestDispatcher(UserRequestHelper.process(request, response)).forward(request, response);
 	}
 
 	/**
@@ -31,7 +31,7 @@ public class UserServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		request.getRequestDispatcher(UserRequestHelper.process(request)).forward(request, response);
+		request.getRequestDispatcher(UserRequestHelper.process(request, response)).forward(request, response);
 	}
 
 }

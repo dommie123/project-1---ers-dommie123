@@ -1,19 +1,27 @@
 package com.revature.controllers;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
 
 import com.revature.beans.User;
 import com.revature.beans.User.UserRole;
+import com.revature.exceptions.UsernameAlreadyExistsException;
 import com.revature.services.UserService;
 import com.revature.utils.DaoUtil;
 
 public class RegisterController {
 	
 	private static UserService uServ = new UserService();
+	private static final Logger logger = Logger.getLogger(RegisterController.class);
 	
-	public static String register(HttpServletRequest req) {
+	public static String register(HttpServletRequest req, HttpServletResponse res) {
 		if (!req.getMethod().equals("POST"))
 			return "index.html";
 		
@@ -42,13 +50,18 @@ public class RegisterController {
 		else if (req.getParameter("role").equalsIgnoreCase("manager"))
 			newUser.setRole(UserRole.MANAGER);
 		
-		if (uServ.register(newUser)) {
-			req.getSession().setAttribute("currentuser", newUser);
-			return "home.ers";
-		}
-		else {
-			System.out.println("Failed to register user! Redirecting to login...");
-			return "index.html";
+		try {
+			if (uServ.register(newUser)) {
+				req.getSession().setAttribute("currentuser", newUser);
+				req.getSession().setAttribute("nameofuser", newUser.getFirstName());
+				return "registered.ers";
+			}
+			else {
+				System.out.println("Failed to register user! Redirecting to login...");
+				return "index.html";
+			}
+		} catch (UsernameAlreadyExistsException e) {
+			return "error.html";		
 		}
 	}
 }

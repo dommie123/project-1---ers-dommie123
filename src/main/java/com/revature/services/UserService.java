@@ -1,14 +1,6 @@
 package com.revature.services;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-
-//import java.sql.Connection;
-//import java.sql.DriverManager;
-
 import com.revature.beans.User;
-import com.revature.dao.UserDao;
 import com.revature.dao.UserDaoDB;
 import com.revature.exceptions.InvalidCredentialsException;
 import com.revature.exceptions.UsernameAlreadyExistsException;

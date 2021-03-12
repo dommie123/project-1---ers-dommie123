@@ -1,13 +1,15 @@
 package com.revature.servlets;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import com.revature.controllers.HomeController;
 import com.revature.controllers.LoginController;
 import com.revature.controllers.RegisterController;
+import com.revature.controllers.RegisteredController;
 
 public class UserRequestHelper {
-	public static String process(HttpServletRequest req) {
+	public static String process(HttpServletRequest req, HttpServletResponse res) {
 		System.out.println(req.getRequestURI());
 		switch (req.getRequestURI()) {
 		case "/project1/resources/html/login.ers": 
@@ -18,7 +20,9 @@ public class UserRequestHelper {
 			return HomeController.home(req);
 		case "/project1/resources/html/register.ers":
 			System.out.println("In register.ers rhelper");
-			return RegisterController.register(req);
+			return RegisterController.register(req, res);
+		case "/project1/resources/html/registered.ers":
+			return RegisteredController.printRegistered(res);
 		default: 
 			System.out.println("In default");
 			return "error.html";
