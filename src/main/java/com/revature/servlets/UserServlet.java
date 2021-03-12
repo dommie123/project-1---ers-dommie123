@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
  * Servlet implementation class MasterServlet
  */
 public class UserServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 171340721L;
 
     /**
      * Default constructor. 

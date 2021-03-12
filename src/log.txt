@@ -1406,3 +1406,22 @@
 2021-03-08 17:42:43 ERROR UserDaoDB:46 - Query Failed to Execute! Please fix this immediately!
 2021-03-08 17:42:43 ERROR UserDaoDB:46 - Query Failed to Execute! Please fix this immediately!
 2021-03-08 17:43:37 ERROR UserDaoDB:46 - Query Failed to Execute! Please fix this immediately!
+2021-03-11 16:02:55 FATAL ConnectionUtil:50 - Failed to establish a connection to the database! Please fix this immediately!
+2021-03-11 16:02:55 FATAL ConnectionUtil:50 - Failed to establish a connection to the database! Please fix this immediately!
+2021-03-11 16:03:35 ERROR UserDaoDB:186 - Query Failed to Execute! Please fix this immediately!
+2021-03-11 16:03:35 ERROR UserDaoDB:186 - Query Failed to Execute! Please fix this immediately!
+2021-03-11 16:03:35 ERROR UserDaoDB:46 - Query Failed to Execute! Please fix this immediately!
+2021-03-11 16:03:35 ERROR UserDaoDB:46 - Query Failed to Execute! Please fix this immediately!
+2021-03-11 16:03:36 ERROR UserDaoDB:46 - Query Failed to Execute! Please fix this immediately!
+2021-03-11 16:03:37 ERROR ReimbDaoDB:84 - Query failed to execute! Please fix this immediately!
+2021-03-11 16:03:38 ERROR UserDaoDB:46 - Query Failed to Execute! Please fix this immediately!
+2021-03-11 16:03:39 ERROR UserDaoDB:46 - Query Failed to Execute! Please fix this immediately!
+2021-03-11 18:52:33 ERROR UserDaoDB:46 - Query Failed to Execute! Please fix this immediately!
+2021-03-11 18:52:45 ERROR UserDaoDB:186 - Query Failed to Execute! Please fix this immediately!
+2021-03-11 18:52:45 ERROR UserDaoDB:186 - Query Failed to Execute! Please fix this immediately!
+2021-03-11 18:52:45 ERROR UserDaoDB:46 - Query Failed to Execute! Please fix this immediately!
+2021-03-11 18:52:45 ERROR UserDaoDB:46 - Query Failed to Execute! Please fix this immediately!
+2021-03-11 18:52:45 ERROR UserDaoDB:46 - Query Failed to Execute! Please fix this immediately!
+2021-03-11 18:52:47 ERROR ReimbDaoDB:84 - Query failed to execute! Please fix this immediately!
+2021-03-11 18:52:48 ERROR UserDaoDB:46 - Query Failed to Execute! Please fix this immediately!
+2021-03-11 18:52:48 ERROR UserDaoDB:46 - Query Failed to Execute! Please fix this immediately!

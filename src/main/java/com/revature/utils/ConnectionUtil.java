@@ -9,12 +9,14 @@ import java.util.Properties;
 
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
+import org.postgresql.Driver;
 
 public class ConnectionUtil {
 	
+	private String driver;
 	private String url;
 	private String user;
-	private String pword;
+	private String password;
 	
 	private static ConnectionUtil util = null;
 	private static final Logger logger = Logger.getLogger(ConnectionUtil.class);
@@ -28,9 +30,10 @@ public class ConnectionUtil {
 		
 		try {
 			p.load(is);
+			this.driver = p.getProperty("driver");
 			this.url = p.getProperty("url");
 			this.user = p.getProperty("usr");
-			this.pword = p.getProperty("pswd");
+			this.password = p.getProperty("pswd");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -44,11 +47,11 @@ public class ConnectionUtil {
 	
 	public Connection getConnection() {
 		try {
-			Connection conn = DriverManager.getConnection(url, user, pword);
+			Connection conn = DriverManager.getConnection(url, user, password);
 			return conn;
 		} catch (SQLException e) {
-			logger.log(Level.FATAL, "Failed to establish a connection to the database! Please fix this immediately!");
-			System.out.println(e.getLocalizedMessage());
+			logger.log(Level.FATAL, "Failed to establish a connection to the database! \nError Message: " + e.getLocalizedMessage());
+			
 		}
 		return null;
 	}

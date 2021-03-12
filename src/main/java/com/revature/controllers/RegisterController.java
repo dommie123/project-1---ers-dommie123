@@ -1,5 +1,7 @@
 package com.revature.controllers;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import com.revature.beans.User;
@@ -15,8 +17,14 @@ public class RegisterController {
 		if (!req.getMethod().equals("POST"))
 			return "index.html";
 		
+		List<User> users = DaoUtil.getUserDao().getAllUsers();
 		User newUser = new User();
-		newUser.setId(DaoUtil.getUserDao().getAllUsers().size() + 1);
+		
+		if (users != null)
+			newUser.setId(DaoUtil.getUserDao().getAllUsers().size() + 1);
+		else
+			newUser.setId(1);
+		
 		newUser.setFirstName(req.getParameter("firstname"));
 		newUser.setLastName(req.getParameter("lastname"));
 		newUser.setEmail(req.getParameter("email"));
