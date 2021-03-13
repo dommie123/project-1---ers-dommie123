@@ -19,6 +19,21 @@ window.onload = function() {
 	}
 }
 
+function getUser() {
+	let xhttp = new XMLHttpRequest();
+	
+	xhttp.onreadystatechange = function() {
+		if (xhttp.readyState == 4 && xhttp.status == 200) {
+			let userJSON = JSON.parse(xhttp.responseText);
+			console.log(userJSON);
+		}
+	}
+	
+	xhttp.open("POST", 'http://localhost:8081/project1/resources/html/register.ers');
+	
+	xhttp.send();
+}
+
 function alertUser(element) {
 	element.style.borderColor = 'red';
 	let warnMessage = document.createElement('p');
