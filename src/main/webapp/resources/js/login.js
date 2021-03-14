@@ -3,13 +3,13 @@
  */
 
 window.onload = function() {
-	let items = document.getElementsByTag("input");
-	document.getElementById('login-form').addEventListener('click', function(event) {
+	let items = document.getElementsByTagName("input");
+	document.getElementById('login-form').addEventListener('submit', function(event) {
 		for (let el of items) {
 			if (el.value == "") {
-				alertUser(el);
 				event.preventDefault();
-				event.stopPropogation();
+				event.stopPropagation();
+				alertUser(el);
 			}
 		}
 	})
@@ -26,6 +26,7 @@ function getUser() {
 		if (xhttp.readyState == 4 && xhttp.status == 200) {
 			let userJSON = JSON.parse(xhttp.responseText);
 			console.log(userJSON);
+			DOMManip(userJSON);
 		}
 	}
 	
@@ -34,12 +35,16 @@ function getUser() {
 	xhttp.send();
 }
 
+function DOMManip(uJSON) {
+	document.getElementById("welcome").innerText = `Welcome, ${uJSON.firstName}!`;
+}
+
 function alertUser(element) {
 	element.style.borderColor = 'red';
 	let warnMessage = document.createElement('p');
 	warnMessage.style.color = 'red';
 	warnMessage.innerText = 'This field cannot be empty!';
-	document.insertBefore(warnMessage, element);
+	document.getElementById("login").appendChild(warnMessage);
 	
 }
 

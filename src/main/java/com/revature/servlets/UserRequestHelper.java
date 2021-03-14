@@ -1,20 +1,23 @@
 package com.revature.servlets;
 
+import java.io.IOException;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.revature.controllers.HomeController;
 import com.revature.controllers.LoginController;
 import com.revature.controllers.RegisterController;
 import com.revature.controllers.RegisteredController;
 
 public class UserRequestHelper {
-	public static String process(HttpServletRequest req, HttpServletResponse res) {
+	public static String process(HttpServletRequest req, HttpServletResponse res) throws IOException {
 		System.out.println(req.getRequestURI());
 		switch (req.getRequestURI()) {
 		case "/project1/resources/html/login.ers": 
 			System.out.println("In login.change rhelper");
-			return LoginController.login(req);
+			return LoginController.login(req, res);
 		case "/project1/resources/html/home.ers":
 			System.out.println("In home.change rhelper");
 			return HomeController.home(req);

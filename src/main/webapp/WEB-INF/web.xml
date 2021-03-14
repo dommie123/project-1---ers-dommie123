@@ -14,4 +14,14 @@
     <servlet-name>UserServlet</servlet-name>
     <url-pattern>*.ers</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ReimbursementServlet</display-name>
+    <servlet-name>ReimbursementServlet</servlet-name>
+    <servlet-class>com.revature.servlets.ReimbursementServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ReimbursementServlet</servlet-name>
+    <url-pattern>*.reimb</url-pattern>
+  </servlet-mapping>
 </web-app>

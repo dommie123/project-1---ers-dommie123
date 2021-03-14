@@ -7,8 +7,44 @@
 	</head>
 	<body>
 		<header class="header">
-			<h1>Welcome, user!</h1>
+			<h1 id="welcome">Hello, user!</h1>
 		</header>
+		<table class="table">
+			<thead>Expense Reimbursements</thead>
+			<tr>
+				<th scope="col">Reimbursement Id</th>
+				<th scope="col">Type</th>
+				<th scope="col">Amount</th>
+				<th scope="col">Status</th>
+				<th scope="col">Submitted</th>
+				<th scope="col">Resolved</th>
+			</tr>
+			<!-- Here, JS will insert the reimbursements via a JSON file or some other method. -->
+		</table>
+		<script type="text/javascript">
+			window.onload = getUser();	
 		
+		
+			function getUser() {
+				let xhttp = new XMLHttpRequest();
+			
+				xhttp.onreadystatechange = function() {
+					if (xhttp.readyState == 4 && xhttp.status == 200) {
+						let userJSON = JSON.parse(xhttp.responseText);
+						console.log(userJSON);
+						DOMManip(userJSON);
+					}
+				}
+			
+				xhttp.open("POST", 'http://localhost:8081/project1/resources/html/register.ers');
+			
+				xhttp.send();
+			}
+
+			function DOMManip(uJSON) {
+				document.getElementById("welcome").innerText = `Welcome, ${uJSON.firstName}!`;
+			}
+		</script>
+		<!-- script src="../js/login.js" type="text/javascript"></script> -->
 	</body>
 </html>

@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.revature.beans.User;
 import com.revature.beans.User.UserRole;
 import com.revature.exceptions.UsernameAlreadyExistsException;
@@ -21,7 +23,7 @@ public class RegisterController {
 	private static UserService uServ = new UserService();
 	private static final Logger logger = Logger.getLogger(RegisterController.class);
 	
-	public static String register(HttpServletRequest req, HttpServletResponse res) {
+	public static String register(HttpServletRequest req, HttpServletResponse res) throws JsonProcessingException{
 		if (!req.getMethod().equals("POST"))
 			return "index.html";
 		
@@ -52,6 +54,9 @@ public class RegisterController {
 		
 		try {
 			if (uServ.register(newUser)) {
+				res.setContentType("application/json");
+				PrintWriter out = res.getWriter();
+				out.write(new ObjectMapper().writeValueAsString(newUser));
 				req.getSession().setAttribute("currentuser", newUser);
 				req.getSession().setAttribute("nameofuser", newUser.getFirstName());
 				return "registered.ers";
@@ -62,6 +67,8 @@ public class RegisterController {
 			}
 		} catch (UsernameAlreadyExistsException e) {
 			return "error.html";		
+		} catch (IOException e) {
+			return "error.html";
 		}
 	}
 }
