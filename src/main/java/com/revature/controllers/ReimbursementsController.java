@@ -24,7 +24,8 @@ public class ReimbursementsController {
 		User current = SessionCache.getCurrentUser().get();
 		if (current.getRole().equals(UserRole.EMPLOYEE)) {
 			reimbList = reimbDao.getReimbursementsByAuthor(current);
-			res.getWriter().write(new ObjectMapper().writeValueAsString(current));
+			if (reimbList != null)
+				res.getWriter().write(new ObjectMapper().writeValueAsString(reimbList));
 		}
 	}
 	

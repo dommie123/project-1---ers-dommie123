@@ -18,10 +18,10 @@ public class JSONRequestHelper {
 		}
 		
 		switch (req.getRequestURI()) {
-		case "project1/resources/html/login.json":
+		case "/project1/resources/html/login.json":
 			RegisteredController.printUser(req, res);
 			break;
-		case "project1/resources/html/reimb.json":
+		case "/project1/resources/html/reimb.json":
 			ReimbursementsController.viewReimbursements(req, res);
 			break;
 		default:

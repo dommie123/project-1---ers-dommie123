@@ -18,7 +18,7 @@
     <description></description>
     <display-name>JSONMasterServlet</display-name>
     <servlet-name>JSONMasterServlet</servlet-name>
-    <servlet-class>com.revature.servlets.ReimbursementServlet</servlet-class>
+    <servlet-class>com.revature.servlets.JSONMasterServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>JSONMasterServlet</servlet-name>

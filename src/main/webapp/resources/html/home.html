@@ -11,7 +11,7 @@
 		</header>
 		<br />
 		<div id="table-title">Expense Reimbursements</div>
-		<table class="table">
+		<table class="table" id="reimbursements">
 			<thead>
 				<tr>
 					<th scope="col">Reimbursement Id</th>
@@ -33,10 +33,82 @@
 		</div>
 		<script type="text/javascript">
 			window.onload = getUser();	
-		
+			document.getElementById("refresh").addEventListener("click", refreshList);
+
+			function refreshList() {
+
+			    let xhttp = new XMLHttpRequest();
+
+			    xhttp.onreadystatechange = function() {
+			        if (xhttp.readyState == 4 && xhttp.status == 200) {
+			            let reimbJSON = JSON.parse(xhttp.responseText);
+			            console.log(reimbJSON);
+			            tableManip(reimbJSON);
+			        }
+			    }
+
+			    xhttp.open("POST", "http://localhost:8080/project1/resources/html/reimb.json");
+
+			    xhttp.send();
+			}
+
+			function tableManip(reimbJSON) {
+			    let reimBody = document.createElement('tbody');
+			    document.getElementById("reimbursements").appendChild(reimBody);
+
+			    let size = 0;
+			    for (let el of reimbJSON) {
+			        let id = document.createElement('td');
+			        id.innerText = reimbJSON[size].id;
+			        let amount = document.createElement('td');
+			        amount.innerText = reimbJSON[size].amount;
+			        let submitted = document.createElement('td');
+			        submitted.innerText = reimbJSON[size].submitted;
+			        let resolved = document.createElement('td');
+			        resolved.innerText = reimbJSON[size].resolved;
+			        let description = document.createElement('td');
+			        description.innerText = reimbJSON[size].description;
+			        let receipt = document.createElement('td');
+			        receipt.innerText = reimbJSON[size].receipt;
+			        let author = document.createElement('td');
+			        author.innerText = reimbJSON[size].author;
+			        let resolver = document.createElement('td');
+			        resolver.innerText = reimbJSON[size].resolver;
+			        let status = document.createElement('td');
+			        status.innerText = reimbJSON[size].status;
+			        let type = document.createElement('td');
+			        type.innerText = reimbJSON[size].type;
+
+			        row.appendChild(id);
+			        row.appendChild(amount);
+			        row.appendChild(submitted);
+			        row.appendChild(resolved);
+			        row.appendChild(description);
+			        row.appendChild(receipt);
+			        row.appendChild(author);
+			        row.appendChild(resolver);
+			        row.appendChild(status);
+			        row.appendChild(type);
+			        size++;			  
+			    }
+
+
+			    if (size <= 0) {
+			        let el = document.createElement('div');
+			        el.setAttribute('id', 'noreimb')
+			        document.body.appendChild(el);
+
+			        let message = document.createElement('th');
+			        message.style.color = "red";
+			        message.innerText = "You don't have any reimbursement claims with us! Please create one to build your list!";
+			        el.appendChild(message);
+			    }
+			    // TODO add logic to table
+			}
+			
 			function getUser() {
 				let xhttp = new XMLHttpRequest();
-			
+				
 				xhttp.onreadystatechange = function() {
 					if (xhttp.readyState == 4 && xhttp.status == 200) {
 						let userJSON = JSON.parse(xhttp.responseText);
@@ -44,9 +116,9 @@
 						DOMManip(userJSON);
 					}
 				}
-			
-				xhttp.open("POST", 'http://localhost:8081/project1/resources/html/login.json');
-			
+				
+				xhttp.open("POST", 'http://localhost:8080/project1/resources/html/login.json');
+				
 				xhttp.send();
 			}
 
@@ -54,6 +126,5 @@
 				document.getElementById("welcome").innerText = `Hello, ${uJSON.firstName}!`;
 			}
 		</script>
-		<!-- script src="../js/login.js" type="text/javascript"></script> -->
 	</body>
 </html>
