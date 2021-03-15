@@ -9,13 +9,13 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class ReimbursementServlet
  */
-public class ReimbursementServlet extends HttpServlet {
+public class JSONMasterServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ReimbursementServlet() {
+    public JSONMasterServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -25,7 +25,7 @@ public class ReimbursementServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		JSONRequestHelper.process(request, response);
 	}
 
 	/**
@@ -33,7 +33,7 @@ public class ReimbursementServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
+		JSONRequestHelper.process(request, response);
 	}
 
 }

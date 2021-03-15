@@ -30,13 +30,13 @@ function getUser() {
 		}
 	}
 	
-	xhttp.open("POST", 'http://localhost:8081/project1/resources/html/register.ers');
+	xhttp.open("POST", 'http://localhost:8080/project1/resources/html/login.json');
 	
 	xhttp.send();
 }
 
 function DOMManip(uJSON) {
-	document.getElementById("welcome").innerText = `Welcome, ${uJSON.firstName}!`;
+	document.getElementById("welcome").innerText = `Hello, ${uJSON.firstName}!`;
 }
 
 function alertUser(element) {
@@ -49,7 +49,7 @@ function alertUser(element) {
 }
 
 function removeAlert(index, element) {
-	let items = document.getElementsByTag('input');
+	let items = document.getElementsByTagName('input');
 	items[index].style.borderColor = '#CED4DA';
 	document.removeElement(element);
 }

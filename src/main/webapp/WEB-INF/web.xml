@@ -16,12 +16,12 @@
   </servlet-mapping>
   <servlet>
     <description></description>
-    <display-name>ReimbursementServlet</display-name>
-    <servlet-name>ReimbursementServlet</servlet-name>
+    <display-name>JSONMasterServlet</display-name>
+    <servlet-name>JSONMasterServlet</servlet-name>
     <servlet-class>com.revature.servlets.ReimbursementServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>ReimbursementServlet</servlet-name>
-    <url-pattern>*.reimb</url-pattern>
+    <servlet-name>JSONMasterServlet</servlet-name>
+    <url-pattern>*.json</url-pattern>
   </servlet-mapping>
 </web-app>
