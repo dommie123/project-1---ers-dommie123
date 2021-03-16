@@ -10,6 +10,7 @@ import com.revature.controllers.HomeController;
 import com.revature.controllers.LoginController;
 import com.revature.controllers.RegisterController;
 import com.revature.controllers.RegisteredController;
+import com.revature.controllers.ReimbursementsController;
 
 public class UserRequestHelper {
 	public static String process(HttpServletRequest req, HttpServletResponse res) throws IOException {
@@ -25,7 +26,11 @@ public class UserRequestHelper {
 			System.out.println("In register.ers rhelper");
 			return RegisterController.register(req, res);
 		case "/project1/resources/html/registered.ers":
+			System.out.println("In registere[d].ers");
 			return RegisteredController.printRegistered(res);
+		case "/project1/resources/html/add-reimb.ers":
+			System.out.println("In add-reimb.ers");
+			return ReimbursementsController.addReimb(req, res);
 		default: 
 			System.out.println("In default");
 			return "error.html";
