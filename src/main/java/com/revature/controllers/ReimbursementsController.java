@@ -6,7 +6,9 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.revature.beans.Reimbursement;
 import com.revature.beans.Reimbursement.ReimbursementStatus;
@@ -58,15 +60,19 @@ public class ReimbursementsController {
 		return "home.ers";
 	}
 	
-	public static String resolveReimb(HttpServletRequest req, HttpServletResponse res) {
+	public static String resolveReimb(HttpServletRequest req, HttpServletResponse res) throws JsonParseException, JsonMappingException, IOException {
 		// If the current user is not a financial manager, redirect them to the error page.
 		User current = SessionCache.getCurrentUser().get();
 		if (!current.getRole().equals(UserRole.MANAGER)) {
 			return "unauthorized.ers";
 		}
+		String jsonString = "";
+		Reimbursement reimb = new ObjectMapper().readValue(jsonString, Reimbursement.class);
+		rServ.resolveTicket(reimb, true);
+		System.out.println("Success");
 		
 		// TODO write logic for financial managers
-		return "";
+		return "home.ers";
 	}
 	
 }

@@ -2,8 +2,10 @@
  * 
  */
 
-window.onload = getUser();
-document.getElementById("refresh").addEventListener("click", refreshList);
+window.onload = () => {
+	getUser();
+	refreshList();
+}
 var currentSize = 0;
 var size = 0;
 
@@ -68,8 +70,8 @@ function tableManip(reimbJSON) {
 			row.appendChild(type);
 			row.appendChild(amount);
 			row.appendChild(status);
-			row.appendChild(submitted)
-			row.appendChild(resolved)
+			row.appendChild(submitted);
+			row.appendChild(resolved);
 			//row.appendChild(description);
 			//row.appendChild(receipt);
 			//row.appendChild(author);
@@ -120,5 +122,9 @@ function DOMManip(uJSON) {
 	document.getElementById("welcome").innerText = `Hello, ${uJSON.firstName}!`;
 	if (uJSON.role == 'EMPLOYEE') {
 		document.getElementById('table-title').innerHTML = '<div id="table-title"><h1>Your Expense Reimbursements</h1></div>';
+		document.getElementById('refresh').setAttribute('hidden', true);
+	}
+	else if (uJSON.role == 'MANAGER') {
+		document.getElementById('refresh').removeAttribute('hidden');
 	}
 }

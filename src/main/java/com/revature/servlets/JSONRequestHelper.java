@@ -24,6 +24,8 @@ public class JSONRequestHelper {
 		case "/project1/resources/html/reimb.json":
 			ReimbursementsController.viewReimbursements(req, res);
 			break;
+		case "/project1/resources/html/update.json":
+			ReimbursementsController.resolveReimb(req, res);
 		default:
 			req.getRequestDispatcher("error.html").forward(req, res);
 		}
