@@ -4,35 +4,79 @@
 		<meta charset="ISO-8859-1">
 		<title>Reimbursement Submission Form</title>
 		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous" />
+		<style>
+			header {
+				margin-top: 35px;
+				margin-bottom: 3em;
+				text-align: center;
+			}
+			label {
+				margin: 5px auto;
+			}
+			input {
+				margin: 1.5em auto;
+			}
+			.radio-type {
+				margin: 5px auto;
+			}
+			#add-claim {
+				margin: 5em auto;
+				padding-top: 1em;
+				padding-left: 1.5em;
+				border: 5px solid #474C55;
+				border-radius: 5px;
+				background-color: #E5E5E5;
+			}
+			#logo {
+				margin: 0;
+				float: left;
+				position: fixed;
+			}
+			img {
+				width: 125px;
+				height: 100px;
+			}
+			header > h3 {
+				margin-right: 10%;
+			}
+			#go-back {
+				float: right;
+				margin-right: 50px;
+			}
+		</style>
 	</head>
 	<body>
+		<div class="container-sm" id="logo"><img src="../images/revaturelogo.jpg" alt="Revature Logo" />	</div>	
 		<header class="header">
-			<h3>Reimbursement Submission Form</h3>
+			<h3>Reimbursement Submission Form</h3>	
 		</header>
-		<div class="container-sm">
-			<form action="add-reimb.ers" method="post">
+		<div id="go-back">
+			<a href="home.html">Go home</a>
+		</div>
+		<div class="container-sm" id="add-claim">
+			<form action="add-reimb.ers" method="post" >
 				<div class="row">
-					<div class="col-sm"><label for="amount">How much would you like to be reimbursed?</label></div>
+					<div class="col-sm"><label for="amount"> How much would you like to be reimbursed?</label></div>
 				</div>
 				<div class="row">
-					<div class="col-sm"><input type="text" name="amount" /></div>
+					<div class="col-sm"><input type="text" name="amount" style="margin-top: 0;"/></div>
 				</div>
 				<div class="row">
 					<div class="col-sm"><label for="type">What type of expense will this reimbursement go towards?</label></div>
 				</div>
 				<div class="row">
-					<div class="col-sm"><input type="radio" name="type" value="LODGING" /><span>Lodging</span></div>
+					<div class="col-sm"><input class="radio-type" type="radio" name="type" value="LODGING" /><span> Lodging</span></div>
 				</div>
 				<div class="row">
-					<div class="col-sm"><input type="radio" name="type" value="TRAVEL" /><span>Travel</span></div>
+					<div class="col-sm"><input class="radio-type" type="radio" name="type" value="TRAVEL" /><span> Travel</span></div>
 				</div>
 				<div class="row">
-					<div class="col-sm"><input type="radio" name="type" value="FOOD" /><span>Food</span></div>
+					<div class="col-sm"><input class="radio-type" type="radio" name="type" value="FOOD" /><span> Food</span></div>
 				</div>
 				<div class="row">
-					<div class="col-sm"><input type="radio" name="type" value="OTHER" /><span>Other (Please explain)</span></div>
+					<div class="col-sm"><input class="radio-type" type="radio" name="type" value="OTHER" /><span> Other (Please explain)</span></div>
 				</div>
-				<div class="row">
+				<div class="row" style="margin-top: 20px;">
 					<div class="col-sm"><label for="description">Please provide a brief description on why you would like this reimbursement (Optional).</label></div>
 				</div>
 				<div class="row">
@@ -43,5 +87,8 @@
 				</div>
 			</form>
 		</div>
+		<script type="text/javascript">
+			
+		</script>
 	</body>
 </html>

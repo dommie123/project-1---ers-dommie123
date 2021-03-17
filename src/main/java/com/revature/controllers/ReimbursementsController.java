@@ -31,6 +31,11 @@ public class ReimbursementsController {
 			if (reimbList != null)
 				res.getWriter().write(new ObjectMapper().writeValueAsString(reimbList));
 		}
+		else if (current.getRole().equals(UserRole.MANAGER)) {
+			reimbList = reimbDao.getReimbursements();
+			if (reimbList != null)
+				res.getWriter().write(new ObjectMapper().writeValueAsString(reimbList));
+		}
 	}
 
 	public static String addReimb(HttpServletRequest req, HttpServletResponse res) {
@@ -49,6 +54,7 @@ public class ReimbursementsController {
 		reimb.setDescription(req.getParameter("description"));
 		
 		rServ.submitTicket(reimb);
+		System.out.println("Success!");
 		return "home.ers";
 	}
 	

@@ -3,7 +3,7 @@
  */
 
 window.onload = function() {
-	let items = document.getElementsByTagName("input");
+	var items = document.getElementsByTagName("input");
 	document.getElementById('login-form').addEventListener('submit', function(event) {
 		for (let el of items) {
 			if (el.value == "") {
@@ -15,7 +15,7 @@ window.onload = function() {
 	})
 	
 	for (let el of items) {
-		el.addEventListener('focus', removeAlert);
+		el.addEventListener('change', removeAlert(el));
 	}
 }
 
@@ -24,12 +24,21 @@ function alertUser(element) {
 	let warnMessage = document.createElement('p');
 	warnMessage.style.color = 'red';
 	warnMessage.innerText = 'This field cannot be empty!';
-	document.getElementById("login").appendChild(warnMessage);
-	
+//	document.getElementById("login").appendChild(warnMessage);
+	element.parentNode.appendChild(warnMessage);
 }
 
-function removeAlert(index, element) {
-	let items = document.getElementsByTagName('input');
-	items[index].style.borderColor = '#CED4DA';
-	document.removeElement(element);
+function removeAlert(event) {
+	console.log(event);
+	for (let el of items) {
+		if (el.value != "") {
+			element.style.borderColor = '#CED4DA';
+		}
+	}
+	
+	let divs = document.getElementsByClassName('mb-3');
+	for (let el of divs) {
+		let message = el.querySelector('p');
+		el.removeChild(message);
+	}
 }

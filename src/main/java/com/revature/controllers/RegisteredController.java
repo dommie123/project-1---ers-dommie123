@@ -17,10 +17,12 @@ public class RegisteredController {
 	private static UserDao uDao = DaoUtil.getUserDao();
 
 	public static String printRegistered(HttpServletResponse res) {
+		res.setContentType("text/html");
 		return "registered.html";
 	}
 	
 	public static void printUser(HttpServletRequest req, HttpServletResponse res) throws JsonProcessingException, IOException {
+		res.setContentType("text/json");
 		User u = uDao.getUserByCredentials(SessionCache.getCurrentUser().get().getUserName(), SessionCache.getCurrentUser().get().getPassword());
 		if (u != null)
 			res.getWriter().write(new ObjectMapper().writeValueAsString(u));
