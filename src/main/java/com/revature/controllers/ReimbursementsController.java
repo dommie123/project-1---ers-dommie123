@@ -43,8 +43,8 @@ public class ReimbursementsController {
 	public static void getReimbursement(HttpServletRequest req, HttpServletResponse res) throws JsonProcessingException, IOException {
 		User current = SessionCache.getCurrentUser().get();
 		if (current.getRole().equals(UserRole.MANAGER)) {
-			System.out.println(req.getParameter("reimb-id"));
-			Reimbursement reimb = reimbDao.getReimbursementById(Integer.parseInt(req.getParameter("reimb-id")));
+			System.out.println(req.getParameter("reimbid"));
+			Reimbursement reimb = reimbDao.getReimbursementById(Integer.parseInt(req.getParameter("reimbid")));
 			if (reimb != null) 
 				res.getWriter().write(new ObjectMapper().writeValueAsString(reimb));
 		}

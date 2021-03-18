@@ -6,6 +6,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.revature.controllers.GetReimbursementController;
 import com.revature.controllers.RegisteredController;
 import com.revature.controllers.ReimbursementsController;
 
@@ -28,7 +29,9 @@ public class JSONRequestHelper {
 			ReimbursementsController.resolveReimb(req, res);
 			break;
 		case "/project1/resources/html/getReimb.json":
+			System.out.println(req.getParameter("reimbid"));
 			ReimbursementsController.getReimbursement(req, res);
+			break;
 		default:
 			req.getRequestDispatcher("error.html").forward(req, res);
 		}

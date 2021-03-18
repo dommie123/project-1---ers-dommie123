@@ -1,9 +1,7 @@
 /**
  * 
  */
-window.onload = () => {
-	document.getElementById('get-reimb').addEventListener('submit', getReimbursement);
-}
+window.onload = getReimbursement();
 let reimbObj = null;
 
 function getReimbursement() {
@@ -30,10 +28,10 @@ function UpdateReimb(reimbJSON) {
 			return;
 		}
 		else {
-			document.getElementById('search').setAttribute("hidden", true);
-			document.getElementById('get-reimb').removeEventListener("submit", getReimbursement);
-			let header = document.createElement('div');
-			header.innerHTML = '<div class="container-sm" id="message"><h6>Please review the reimbursement before updating it.</h6></div><br />';
+			//document.getElementById('search').setAttribute("hidden", true);
+			//document.getElementById('get-reimb').removeEventListener("submit", getReimbursement);
+			let header = document.createElement('header');
+			header.innerHTML = '<header class="container-sm" id="message"><h6>Please review the reimbursement before updating it.</h6></header><br />';
 			document.body.appendChild(header);
 
 			for (let i = 0; i < 8; i++) {
@@ -91,6 +89,6 @@ function UpdateReimb(reimbJSON) {
 
 function sendUpdate() {
 	if (reimbObj != null) {
-
+		// TODO write logic here
 	}
 }

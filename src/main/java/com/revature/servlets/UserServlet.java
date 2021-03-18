@@ -15,14 +15,13 @@ public class UserServlet extends HttpServlet {
      * Default constructor. 
      */
     public UserServlet() {
-        // TODO Auto-generated constructor stub
+    	super();
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		request.getRequestDispatcher(UserRequestHelper.process(request, response)).forward(request, response);
 	}
 
@@ -30,7 +29,6 @@ public class UserServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		request.getRequestDispatcher(UserRequestHelper.process(request, response)).forward(request, response);
 	}
 
