@@ -17,10 +17,7 @@
 				background-color: #E5E5E5;
 			}
 			.row {
-				margin: 15px auto;
-			}
-			.col-sm {
-				margin: auto 10%;
+				margin: 15px 5%;
 			}
 		</style>
 	</head>
@@ -31,8 +28,9 @@
 		<div class="container">
 			<form action="" method="post" id="get-reimb">
 				<div class="row">
-					<div class="col-sm" style="float: left;"><label for="reimb-id">Reimbursement ID: </label></div>
+					<div class="col-sm" style="float: left; padding-right: 10px;"><label for="reimb-id">Reimbursement ID: </label></div>
 					<div class="col-sm"><input id="reimb-id" type="text" name="reimb-id" /></div>
+					<div class="col-sm"><br /></div>
 					<div class="col-sm" style="float: right;"><input class="btn btn-info" id="search" type="submit" value="Search this ID" /></div>
 				</div>
 				<div class="row" hidden="true">

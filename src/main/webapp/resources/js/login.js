@@ -1,9 +1,9 @@
 /**
  * 
  */
+var items = document.getElementsByTagName("input");
 
 window.onload = function() {
-	var items = document.getElementsByTagName("input");
 	document.getElementById('login-form').addEventListener('submit', function(event) {
 		for (let el of items) {
 			if (el.value == "") {
