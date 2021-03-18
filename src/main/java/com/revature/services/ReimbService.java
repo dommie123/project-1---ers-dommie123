@@ -1,12 +1,14 @@
 package com.revature.services;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.revature.beans.Reimbursement;
 import com.revature.dao.ReimbDaoDB;
 import com.revature.dao.ReimbursementDao;
 import com.revature.exceptions.UnauthorizedException;
 import com.revature.utils.DaoUtil;
 import com.revature.utils.SessionCache;
-
 import com.revature.beans.User;
 import com.revature.beans.Reimbursement.ReimbursementStatus;
 import com.revature.beans.User.UserRole;
@@ -43,6 +45,17 @@ public class ReimbService {
 		reimb.setResolver(current);
 		reimb.setResolved();
 		rDao.updateReimbursement(reimb);
+	}
+	
+	public List<Reimbursement> getPendingRequests() {
+		List<Reimbursement> rList = rDao.getReimbursements();
+		List<Reimbursement> rPending = new ArrayList<>();
+		for (Reimbursement r : rList) {
+			if (r.getStatus().equals(ReimbursementStatus.PENDING)) {
+				rPending.add(r);
+			}
+		}
+		return rPending;
 	}
 	
 }

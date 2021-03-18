@@ -2,6 +2,7 @@ package com.revature.controllers;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -11,7 +12,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.revature.beans.Reimbursement;
-import com.revature.beans.Reimbursement.ReimbursementStatus;
 import com.revature.beans.Reimbursement.ReimbursementType;
 import com.revature.beans.User;
 import com.revature.beans.User.UserRole;
@@ -34,9 +34,19 @@ public class ReimbursementsController {
 				res.getWriter().write(new ObjectMapper().writeValueAsString(reimbList));
 		}
 		else if (current.getRole().equals(UserRole.MANAGER)) {
-			reimbList = reimbDao.getReimbursements();
+			reimbList = rServ.getPendingRequests();
 			if (reimbList != null)
 				res.getWriter().write(new ObjectMapper().writeValueAsString(reimbList));
+		}
+	}
+	
+	public static void getReimbursement(HttpServletRequest req, HttpServletResponse res) throws JsonProcessingException, IOException {
+		User current = SessionCache.getCurrentUser().get();
+		if (current.getRole().equals(UserRole.MANAGER)) {
+			System.out.println(req.getParameter("reimb-id"));
+			Reimbursement reimb = reimbDao.getReimbursementById(Integer.parseInt(req.getParameter("reimb-id")));
+			if (reimb != null) 
+				res.getWriter().write(new ObjectMapper().writeValueAsString(reimb));
 		}
 	}
 
@@ -66,7 +76,7 @@ public class ReimbursementsController {
 		if (!current.getRole().equals(UserRole.MANAGER)) {
 			return "unauthorized.ers";
 		}
-		String jsonString = "";
+		String jsonString = req.getReader().lines().collect(Collectors.joining());
 		Reimbursement reimb = new ObjectMapper().readValue(jsonString, Reimbursement.class);
 		rServ.resolveTicket(reimb, true);
 		System.out.println("Success");

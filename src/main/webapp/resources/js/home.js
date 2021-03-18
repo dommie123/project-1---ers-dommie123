@@ -125,6 +125,7 @@ function DOMManip(uJSON) {
 		document.getElementById('refresh').setAttribute('hidden', true);
 	}
 	else if (uJSON.role == 'MANAGER') {
+		document.getElementById('table-title').innerHTML = '<div id="table-title"><h1>Expense Reimbursements Pending Approval</h1></div>';
 		document.getElementById('refresh').removeAttribute('hidden');
 	}
 }

@@ -4,6 +4,25 @@
 		<meta charset="ISO-8859-1">
 		<title>Reimbursement Update Form</title>
 		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous" />
+		<style>
+			header {
+				text-align: center;
+				margin: 25px auto;
+			}
+			.container {
+				width: 85%;
+				margin-top: 2em;
+				border: 5px solid #474C55;
+				border-radius: 5px;
+				background-color: #E5E5E5;
+			}
+			.row {
+				margin: 15px auto;
+			}
+			.col-sm {
+				margin: auto 10%;
+			}
+		</style>
 	</head>
 	<body>
 		<header class="header">
@@ -12,9 +31,12 @@
 		<div class="container">
 			<form action="" method="post" id="get-reimb">
 				<div class="row">
-					<div class="col-sm"><label for="reimb-id">Reimbursement ID: </label></div>
-					<div class="col-sm" id="spacer"><br /></div>
-					<div class="col-sm"><input type="text" name="reimb-id" /></div>
+					<div class="col-sm" style="float: left;"><label for="reimb-id">Reimbursement ID: </label></div>
+					<div class="col-sm"><input id="reimb-id" type="text" name="reimb-id" /></div>
+					<div class="col-sm" style="float: right;"><input class="btn btn-info" id="search" type="submit" value="Search this ID" /></div>
+				</div>
+				<div class="row" hidden="true">
+					<p id="warnMessage">This reimbursement has already been updated! Please input a different reimbursement ID.</p>
 				</div>
 				<!-- Here, the attached script will update the form with new elements. -->
 			</form>
