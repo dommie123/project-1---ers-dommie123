@@ -39,7 +39,7 @@ public class UserRequestHelper {
 			return RegisterController.register(req, res);
 		case "/project1/resources/html/registered.ers":
 			System.out.println("In registere[d].ers");
-			return RegisteredController.printRegistered(res);
+			return RegisteredController.printRegistered(req, res);
 		case "/project1/resources/html/add-reimb.ers":
 			System.out.println("In add-reimb.ers");
 			return ReimbursementsController.addReimb(req, res);
@@ -49,6 +49,9 @@ public class UserRequestHelper {
 		case "/project1/resources/html/get-reimb.ers":
 			System.out.println("In get-reimb.ers rhelper");
 			return GetReimbursementController.getReimbursement(req, res);
+		case "/project1/resources/html/updateReimb.ers":
+			System.out.println("In updateReimb.ers rhelper");
+			return ReimbursementsController.resolveReimb(req, res);
 		default: 
 			System.out.println("In default");
 			return "error.html";

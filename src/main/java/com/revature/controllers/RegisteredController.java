@@ -16,12 +16,14 @@ public class RegisteredController {
 	
 	private static UserDao uDao = DaoUtil.getUserDao();
 
-	public static String printRegistered(HttpServletResponse res) {
+	public static String printRegistered(HttpServletRequest req, HttpServletResponse res) {
+		if (SessionCache.getCurrentUser().get() == null) return "index.html";
 		res.setContentType("text/html");
 		return "registered.html";
 	}
 	
 	public static void printUser(HttpServletRequest req, HttpServletResponse res) throws JsonProcessingException, IOException {
+		if (SessionCache.getCurrentUser().get() == null) return;
 		res.setContentType("text/json");
 		User u = uDao.getUserByCredentials(SessionCache.getCurrentUser().get().getUserName(), SessionCache.getCurrentUser().get().getPassword());
 		if (u != null)

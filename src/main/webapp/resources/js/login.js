@@ -1,6 +1,3 @@
-/**
- * 
- */
 var items = document.getElementsByTagName("input");
 
 window.onload = function() {
@@ -15,30 +12,30 @@ window.onload = function() {
 	})
 	
 	for (let el of items) {
-		el.addEventListener('change', removeAlert(el));
+        el.addEventListener('focus', removeAlert);
 	}
 }
 
 function alertUser(element) {
 	element.style.borderColor = 'red';
-	let warnMessage = document.createElement('p');
-	warnMessage.style.color = 'red';
-	warnMessage.innerText = 'This field cannot be empty!';
-//	document.getElementById("login").appendChild(warnMessage);
-	element.parentNode.appendChild(warnMessage);
+	let warnMessage = document.getElementsByClassName('warn-message');
+	for (let el of warnMessage) {
+		el.style.color = 'red';
+		el.removeAttribute("hidden");
+	}
 }
 
 function removeAlert(event) {
-	console.log(event);
 	for (let el of items) {
+		console.log(el);
 		if (el.value != "") {
-			element.style.borderColor = '#CED4DA';
+			el.style.borderColor = '#CED4DA';
 		}
 	}
 	
 	let divs = document.getElementsByClassName('mb-3');
 	for (let el of divs) {
 		let message = el.querySelector('p');
-		el.removeChild(message);
+		message.setAttribute("hidden", "true");
 	}
 }

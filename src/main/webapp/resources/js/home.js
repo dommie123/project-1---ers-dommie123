@@ -38,7 +38,7 @@ function tableManip(reimbJSON) {
 			let id = document.createElement('td');
 			id.innerText = reimbJSON[currentSize].id;
 			let amount = document.createElement('td');
-			amount.innerText = reimbJSON[currentSize].amount;
+			amount.innerText = formatMoney(reimbJSON[currentSize].amount);
 			let submitted = document.createElement('td');
 			//let subTime = Date.UTC(reimbJSON[currentSize].submitted.hour, reimbJSON[currentSize].submitted.minute, reimbJSON[currentSize].submitted.second);
 			let subDate = new Date(`${reimbJSON[currentSize].submitted.year}-${reimbJSON[currentSize].submitted.month}-${reimbJSON[currentSize].submitted.dayOfMonth}`);
@@ -59,6 +59,7 @@ function tableManip(reimbJSON) {
 			receipt.innerText = reimbJSON[currentSize].receipt;
 			let author = document.createElement('td');
 			author.innerText = reimbJSON[currentSize].author;
+			console.log(reimbJSON[currentSize].author);
 			let resolver = document.createElement('td');
 			resolver.innerText = reimbJSON[currentSize].resolver;
 			let status = document.createElement('td');
@@ -69,6 +70,7 @@ function tableManip(reimbJSON) {
 			row.appendChild(id);
 			row.appendChild(type);
 			row.appendChild(amount);
+			row.appendChild(description);
 			row.appendChild(status);
 			row.appendChild(submitted);
 			row.appendChild(resolved);
@@ -125,7 +127,11 @@ function DOMManip(uJSON) {
 		document.getElementById('refresh').setAttribute('hidden', true);
 	}
 	else if (uJSON.role == 'MANAGER') {
-		document.getElementById('table-title').innerHTML = '<div id="table-title"><h1>Expense Reimbursements Pending Approval</h1></div>';
+		document.getElementById('table-title').innerHTML = '<div id="table-title"><h1>All Expense Reimbursements</h1></div>';
 		document.getElementById('refresh').removeAttribute('hidden');
 	}
+}
+
+function formatMoney(number) {
+  	return number.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
 }

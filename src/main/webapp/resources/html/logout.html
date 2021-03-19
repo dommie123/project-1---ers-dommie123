@@ -8,15 +8,20 @@
 			header {
 				text-align: center;
 				margin: 30px auto;
+				margin-right: 10%;
 			}
-			nav {
+			#go-back {
 				margin: auto 5%;
+				float: right;
 			}
-			nav > a {
+			#logo > img {
+				width: inherit;
+				height: inherit;
+			}
+			#logo {
 				float: left;
-				font-size: 12pt;
-			}
-			img {
+				margin-left: 1.5em;
+				margin-top: 1.5em;
 				width: 150px;
 				height: 125px;
 			}
@@ -27,8 +32,8 @@
 		<header class="header">
 			<h3>Thank you for using this service! Have a wonderful day!</h3>
 		</header>
-		<nav class="nav">
-			<a href="index.html">Go back</a>
-		</nav>
+		<div id="go-back">
+			<a href="index.html" style="float: right;">Go back</a>
+		</div>
 	</body>
 </html>

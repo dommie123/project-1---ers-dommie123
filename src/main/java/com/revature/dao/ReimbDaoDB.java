@@ -89,7 +89,7 @@ public class ReimbDaoDB implements ReimbursementDao {
 	@Override
 	public Reimbursement getReimbursementById(int reimbid) {
 		if (conn == null) return null;
-		String query = "SELECT * FROM ers_reimbursement WHERE reimb_id = ? ORDER BY reimb_id";
+		String query = "SELECT * FROM ers_reimbursement WHERE reimb_id = ?";
 		try (PreparedStatement stmt = conn.prepareStatement(query)) {
 			stmt.setInt(1, reimbid);
 			ResultSet rs = stmt.executeQuery();
@@ -143,7 +143,7 @@ public class ReimbDaoDB implements ReimbursementDao {
 	public List<Reimbursement> getReimbursements() {
 		if (conn == null) return null;
 		List<Reimbursement> reimbList = new ArrayList<>();
-		String query = "SELECT * FROM ers_reimbursement ORDER BY reimb_id";
+		String query = "SELECT * FROM ers_reimbursement ORDER BY reimb_status_id";
 		try (Statement stmt = conn.createStatement()) {
 			ResultSet rs = stmt.executeQuery(query);
 			
@@ -195,7 +195,7 @@ public class ReimbDaoDB implements ReimbursementDao {
 	@Override
 	public List<Reimbursement> getReimbursementsByAuthor(User u) {
 		List<Reimbursement> reimbList = new ArrayList<>();
-		String query = "SELECT * FROM ers_reimbursement WHERE reimb_author = ?";
+		String query = "SELECT * FROM ers_reimbursement WHERE reimb_author = ? ORDER BY reimb_id";
 		try (PreparedStatement stmt = conn.prepareStatement(query)) {
 			stmt.setInt(1, u.getId());
 			ResultSet rs = stmt.executeQuery();

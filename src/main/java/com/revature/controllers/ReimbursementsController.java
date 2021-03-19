@@ -27,6 +27,7 @@ public class ReimbursementsController {
 	private static List<Reimbursement> reimbList;
 
 	public static void viewReimbursements(HttpServletRequest req, HttpServletResponse res) throws JsonProcessingException, IOException {
+		if (SessionCache.getCurrentUser().get() == null) return;
 		User current = SessionCache.getCurrentUser().get();
 		if (current.getRole().equals(UserRole.EMPLOYEE)) {
 			reimbList = reimbDao.getReimbursementsByAuthor(current);
@@ -34,23 +35,25 @@ public class ReimbursementsController {
 				res.getWriter().write(new ObjectMapper().writeValueAsString(reimbList));
 		}
 		else if (current.getRole().equals(UserRole.MANAGER)) {
-			reimbList = rServ.getPendingRequests();
+			reimbList = reimbDao.getReimbursements();
 			if (reimbList != null)
 				res.getWriter().write(new ObjectMapper().writeValueAsString(reimbList));
 		}
 	}
 	
 	public static void getReimbursement(HttpServletRequest req, HttpServletResponse res) throws JsonProcessingException, IOException {
+		if (SessionCache.getCurrentUser().get() == null) return;
 		User current = SessionCache.getCurrentUser().get();
 		if (current.getRole().equals(UserRole.MANAGER)) {
-			System.out.println(req.getParameter("reimbid"));
-			Reimbursement reimb = reimbDao.getReimbursementById(Integer.parseInt(req.getParameter("reimbid")));
+			System.out.println(req.getSession().getAttribute("currentreimb"));
+			Reimbursement reimb = (Reimbursement) req.getSession().getAttribute("currentreimb");
 			if (reimb != null) 
 				res.getWriter().write(new ObjectMapper().writeValueAsString(reimb));
 		}
 	}
 
 	public static String addReimb(HttpServletRequest req, HttpServletResponse res) {
+		if (SessionCache.getCurrentUser().get() == null) return "index.html";
 		Reimbursement reimb = new Reimbursement();
 
 		if (req.getParameter("type").equals("LODGING"))
@@ -71,17 +74,25 @@ public class ReimbursementsController {
 	}
 	
 	public static String resolveReimb(HttpServletRequest req, HttpServletResponse res) throws JsonParseException, JsonMappingException, IOException {
+		
 		// If the current user is not a financial manager, redirect them to the error page.
 		User current = SessionCache.getCurrentUser().get();
 		if (!current.getRole().equals(UserRole.MANAGER)) {
 			return "unauthorized.ers";
 		}
 		String jsonString = req.getReader().lines().collect(Collectors.joining());
-		Reimbursement reimb = new ObjectMapper().readValue(jsonString, Reimbursement.class);
-		rServ.resolveTicket(reimb, true);
-		System.out.println("Success");
+		String[] kvp = jsonString.split("=");
+		String value = kvp[1];
+		System.out.println(jsonString);
+		Reimbursement reimb = (Reimbursement) req.getSession().getAttribute("currentreimb");
+		if (reimb != null) {
+			rServ.resolveTicket(reimb, value.equals("APPROVED"));
+			System.out.println("Success");
+		}
+		else {
+			System.out.println("Failure! The reimbursement was null!");
+		}
 		
-		// TODO write logic for financial managers
 		return "home.ers";
 	}
 	
