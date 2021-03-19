@@ -7,8 +7,11 @@ import com.revature.utils.SessionCache;
 public class HomeController {
 
 	public static String home(HttpServletRequest req) {
-		if (SessionCache.getCurrentUser().get() == null) return "index.html";
-			return "home.html";
+		System.out.println(req.getSession().getAttribute("currentuser"));
+		if (SessionCache.getCurrentUser().get() == null || req.getSession().getAttribute("currentuser") == null)
+			return "index.html";
+		return "home.html";
+
 	}
 
 }

@@ -121,6 +121,9 @@ function getUser() {
 }
 
 function DOMManip(uJSON) {
+	if (uJSON == null || uJSON == undefined) {
+		window.location.href = "../html/index.html";	
+	}
 	document.getElementById("welcome").innerHTML = `<p id="welcome">Hello, ${uJSON.firstName}! Not you? <a href="logout.ers">Sign out!</a></p>`;
 	if (uJSON.role == 'EMPLOYEE') {
 		document.getElementById('table-title').innerHTML = '<div id="table-title"><h1>Your Expense Reimbursements</h1></div>';

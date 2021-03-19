@@ -10,6 +10,7 @@ public class LogoutController {
 			return "index.html";
 		
 		req.getSession().invalidate();
+		System.out.println(req.getSession().getAttribute("currentuser"));
 		SessionCache.setCurrentUser(null);
 		return "logout.html";
 	}
