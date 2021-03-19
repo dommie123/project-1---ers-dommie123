@@ -6,7 +6,7 @@ import com.revature.utils.SessionCache;
 
 public class LogoutController {
 	public static String logout(HttpServletRequest req) {
-		if (req.getSession().getAttribute("currentuser") == null || SessionCache.getCurrentUser().get() == null)
+		if (SessionCache.getCurrentUser().get() == null)
 			return "index.html";
 		
 		req.getSession().invalidate();

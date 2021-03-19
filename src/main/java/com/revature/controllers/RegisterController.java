@@ -21,7 +21,6 @@ import com.revature.utils.DaoUtil;
 public class RegisterController {
 	
 	private static UserService uServ = new UserService();
-	private static final Logger logger = Logger.getLogger(RegisterController.class);
 	
 	public static String register(HttpServletRequest req, HttpServletResponse res) throws JsonProcessingException{
 		if (!req.getMethod().equals("POST"))

@@ -4,6 +4,10 @@
   <welcome-file-list>
     <welcome-file>../resources/html/index.html</welcome-file>
   </welcome-file-list>
+  <error-page>
+  	<error-code>404</error-code>
+  	<location>/error.html</location>
+  </error-page>
   <servlet>
     <description></description>
     <display-name>UserServlet</display-name>

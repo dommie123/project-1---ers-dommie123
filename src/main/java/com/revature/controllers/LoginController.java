@@ -28,7 +28,6 @@ public class LoginController {
 				return "badcreds.ers";
 			}	
 			else {
-				//res.getWriter().write(new ObjectMapper().writeValueAsString(DaoUtil.getUserDao().getUserByCredentials(username, password)));
 				req.getSession().setAttribute("currentuser", SessionCache.getCurrentUser().get());
 				return "home.ers";
 			}
