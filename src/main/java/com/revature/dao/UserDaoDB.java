@@ -10,9 +10,6 @@ import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.log4j.Level;
-import org.apache.log4j.Logger;
-
 import com.revature.beans.User;
 import com.revature.beans.User.UserRole;
 import com.revature.utils.ConnectionUtil;
@@ -21,7 +18,6 @@ public class UserDaoDB implements UserDao {
 
 	private ConnectionUtil connUtil = ConnectionUtil.getConnectionUtil();
 	private Connection conn = connUtil.getConnection();
-	private static final Logger logger = Logger.getLogger(UserDaoDB.class);
 	
 	@Override
 	public void addUser(User u) {
@@ -43,7 +39,6 @@ public class UserDaoDB implements UserDao {
 			
 			stmt.execute();
 		} catch (SQLException e) {
-			logger.log(Level.ERROR, "Query Failed to Execute! Please fix this immediately!");
 			System.out.println(e.getLocalizedMessage());
 		}
 	}
@@ -74,7 +69,6 @@ public class UserDaoDB implements UserDao {
 				users.add(u);
 			}
 		} catch (SQLException e) {
-			logger.log(Level.ERROR, "Query Failed to Execute! Please fix this immediately!");
 			System.out.println(e.getLocalizedMessage());
 		}
 		return users;
@@ -107,7 +101,6 @@ public class UserDaoDB implements UserDao {
 			}
 			return u;
 		} catch (SQLException e) {
-			logger.log(Level.ERROR, "Query Failed to Execute! Please fix this immediately!");
 			System.out.println(e.getLocalizedMessage());
 		}
 		return null;
@@ -141,7 +134,6 @@ public class UserDaoDB implements UserDao {
 			}
 			return u;
 		} catch (SQLException e) {
-			logger.log(Level.ERROR, "Query Failed to Execute! Please fix this immediately!");
 			System.out.println(e.getLocalizedMessage());
 		}
 		return null;
@@ -169,7 +161,6 @@ public class UserDaoDB implements UserDao {
 			stmt.execute();
 			
 		} catch (SQLException e) {
-			logger.log(Level.ERROR, "Query Failed to Execute! Please fix this immediately!");
 			System.out.println(e.getLocalizedMessage());
 		}
 	}
@@ -183,7 +174,6 @@ public class UserDaoDB implements UserDao {
 			
 			return stmt.execute() || stmt.getUpdateCount() > 0;
 		} catch (SQLException e) {
-			logger.log(Level.ERROR, "Query Failed to Execute! Please fix this immediately!");
 			System.out.println(e.getLocalizedMessage());
 		}
 		return false;

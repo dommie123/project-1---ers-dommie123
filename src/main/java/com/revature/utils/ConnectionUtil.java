@@ -7,8 +7,6 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
 
-import org.apache.log4j.Level;
-import org.apache.log4j.Logger;
 import org.postgresql.Driver;
 
 public class ConnectionUtil {
@@ -19,7 +17,6 @@ public class ConnectionUtil {
 	private String password;
 	
 	private static ConnectionUtil util = null;
-	private static final Logger logger = Logger.getLogger(ConnectionUtil.class);
 	//Properties p = new Properties();
 	
 	private ConnectionUtil() {
@@ -52,10 +49,8 @@ public class ConnectionUtil {
 			Connection conn = DriverManager.getConnection(url, user, password);
 			return conn;
 		} catch (SQLException e) {
-			logger.log(Level.FATAL, "Failed to establish a connection to the database! \nError Message: " + e.getLocalizedMessage());
-			
+			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
-			logger.log(Level.FATAL, "Failed to read the Driver class! \nError Message: " + e.getLocalizedMessage());
 			e.printStackTrace();
 		}
 		return null;
