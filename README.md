@@ -46,5 +46,33 @@ You should come across this page once you've set up the project correctly.
 
 <img src="src/main/resources/ers-demo.png" alt="Project Demo" />
 
+Note: You may want to register a user account with the application before using it.
+
+Once you create an account or log in, you'll see an empty table at first, as shown in the following image:
+
+<insert image here>
+
+That's because you haven't made any reimbursement claims yet. To make a claim,
+* Click Submit Reimbursement Claim (this button is on the bottom right corner of the empty list).
+* Once there, fill out any information regarding the reimbursement claim, such as the amount, type, and a description.
+* If you have done this correctly, you should see that the list has been populated with the reimbursement you have created. 
+
+If you decide to log in as a manager, you will be presented with a list of all of the reimbursements that each user has made, as shown in the following image: 
+
+<insert image here>
+  
+ As a manager, you can approve or reject these reimbursement claims. To do so, 
+ * Click Update Reimbursement Claim (this button is on the bottom left corner of the list). Take note of the unique ID numbers of each reimbursement as you do this.
+ * You will see a search bar that says "Search Reimbursement By ID", as shown here: 
+ * <insert image here>
+ * Type the ID of the reimbursement you want to approve or deny, then click "Search".
+ * You will then be presented with the following screen, which lists detailed information about the reimburesment:
+ * <insert image here>
+ * To approve this ticket, select "Yes" under "Does this reimbursement fall within company policy". To deny it, select "No".
+ * Once selected, click "Update Reimbursement" on the bottom left corner of the web page.
+ * The newly updated reimbursement will be sorted depending on the status you gave it.
+
+That's all there is to it! When you're done using the program, feel free to log out using the link on the top right corner of the page and stop the server. 
+
 # License
 This project uses the following license: MIT License.
