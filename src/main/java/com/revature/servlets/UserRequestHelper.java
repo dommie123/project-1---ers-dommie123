@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
+import org.apache.log4j.Priority;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.revature.controllers.GetReimbursementController;
