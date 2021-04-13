@@ -42,9 +42,9 @@ For further setup, you will need:
 When running the project, be sure to configure your Tomcat server in your IDE.
 Then, run the project on the server.
 
-Images of what it should look like
-Usage
-Here, you instruct other people on how to use your project after they’ve installed it. This would also be a good place to include screenshots of your project in action.
+You should come across this page once you've set up the project correctly.
+
+<img src="src/main/resources/ers-demo.png alt="Project Demo" />
 
 # License
 This project uses the following license: MIT License.
