@@ -44,7 +44,7 @@ Then, run the project on the server.
 
 You should come across this page once you've set up the project correctly.
 
-<img src="src/main/resources/ers-demo.png alt="Project Demo" />
+<img src="src/main/resources/ers-demo.png" alt="Project Demo" />
 
 # License
 This project uses the following license: MIT License.
