@@ -27,8 +27,14 @@ public class UserService {
 	}
 	
 	public boolean register(User u) throws UsernameAlreadyExistsException {
-		if (uDao.getUserByCredentials(u.getUserName(), u.getPassword()).getUserName() != null && u != null)
-			throw new UsernameAlreadyExistsException();
+		if (uDao.getUserByCredentials(u.getUserName(), u.getPassword()) != null)
+			if (uDao.getUserByCredentials(u.getUserName(), u.getPassword()).getUserName() != null) {
+				throw new UsernameAlreadyExistsException();				
+			} else {
+				uDao.updateUser(u);
+				return true;
+			}
+		
 		else {
 			uDao.addUser(u);
 			return true;

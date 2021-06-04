@@ -7,9 +7,6 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.log4j.Level;
-import org.apache.log4j.Logger;
-
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.revature.beans.User;
@@ -17,6 +14,7 @@ import com.revature.beans.User.UserRole;
 import com.revature.exceptions.UsernameAlreadyExistsException;
 import com.revature.services.UserService;
 import com.revature.utils.DaoUtil;
+import com.revature.utils.SessionCache;
 
 public class RegisterController {
 	
@@ -42,7 +40,7 @@ public class RegisterController {
 		if (req.getParameter("password").equals(req.getParameter("confirmpass")))
 			newUser.setPassword(req.getParameter("password"));
 		else {
-			System.out.println("Passwords do not match! Redirectimg to registration");
+			System.out.println("Passwords do not match! Redirecting to registration");
 			return "register.html";
 		}
 		
@@ -58,6 +56,7 @@ public class RegisterController {
 				out.write(new ObjectMapper().writeValueAsString(newUser));
 				req.getSession().setAttribute("currentuser", newUser);
 				req.getSession().setAttribute("nameofuser", newUser.getFirstName());
+				SessionCache.setCurrentUser(newUser);
 				return "registered.ers";
 			}
 			else {

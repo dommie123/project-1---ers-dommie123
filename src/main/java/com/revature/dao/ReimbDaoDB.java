@@ -13,9 +13,6 @@ import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.log4j.Level;
-import org.apache.log4j.Logger;
-
 import com.revature.beans.Reimbursement;
 import com.revature.beans.Reimbursement.ReimbursementStatus;
 import com.revature.beans.Reimbursement.ReimbursementType;
@@ -27,7 +24,6 @@ public class ReimbDaoDB implements ReimbursementDao {
 	private ConnectionUtil connUtil = ConnectionUtil.getConnectionUtil();
 	private Connection conn = connUtil.getConnection();
 	private UserDao uDao = new UserDaoDB();
-	private static final Logger logger = Logger.getLogger(ReimbDaoDB.class);
 	
 	@Override
 	public void addReimbursement(Reimbursement reimb) {
@@ -81,7 +77,6 @@ public class ReimbDaoDB implements ReimbursementDao {
 			stmt.execute();
 			
 		} catch (SQLException e) {
-			logger.log(Level.ERROR, "Query failed to execute! Please fix this immediately!");
 			e.printStackTrace();
 		}
 	}
@@ -133,7 +128,6 @@ public class ReimbDaoDB implements ReimbursementDao {
 			
 			return reimb;
 		} catch (SQLException e) {
-			logger.log(Level.ERROR, "Query failed to execute! Please fix this immediately!");
 			e.getLocalizedMessage();
 		}
 		return null;
@@ -185,7 +179,6 @@ public class ReimbDaoDB implements ReimbursementDao {
 				reimbList.add(reimb);
 			}
 		} catch (SQLException e) {
-			logger.log(Level.ERROR, "Query failed to execute! Please fix this immediately!");
 			e.getLocalizedMessage();
 		}
 		
@@ -240,7 +233,6 @@ public class ReimbDaoDB implements ReimbursementDao {
 				reimbList.add(reimb);
 			}
 		} catch (SQLException e) {
-			logger.log(Level.ERROR, "Query failed to execute! Please fix this immediately!");
 			e.getLocalizedMessage();
 		}
 		
@@ -296,7 +288,6 @@ public class ReimbDaoDB implements ReimbursementDao {
 			
 			stmt.execute();
 		} catch (SQLException e) {
-			logger.log(Level.ERROR, "Query failed to execute! Please fix this immediately!");
 			System.out.println(e.getLocalizedMessage());
 		}
 	}
@@ -309,7 +300,6 @@ public class ReimbDaoDB implements ReimbursementDao {
 			stmt.setInt(1, reimb.getId());
 			return stmt.execute() || stmt.getUpdateCount() > 0;
 		} catch (SQLException e) {
-			logger.log(Level.ERROR, "Query failed to execute! Please fix this immediately!");
 			e.printStackTrace();
 		}
 		return false;

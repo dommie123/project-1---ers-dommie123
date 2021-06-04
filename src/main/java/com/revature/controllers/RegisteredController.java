@@ -17,8 +17,10 @@ public class RegisteredController {
 	private static UserDao uDao = DaoUtil.getUserDao();
 
 	public static String printRegistered(HttpServletRequest req, HttpServletResponse res) {
-		if (SessionCache.getCurrentUser().get() == null) return "index.html";
 		res.setContentType("text/html");
+		if (SessionCache.getCurrentUser() == null) {
+			return "index.html";
+		}
 		return "registered.html";
 	}
 	
