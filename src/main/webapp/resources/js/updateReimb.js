@@ -91,6 +91,7 @@ function UpdateReimb(reimbJSON) {
 			submit.setAttribute('type', 'submit');
 			submit.setAttribute('class', 'btn btn-primary');
 			submit.setAttribute('value', 'Update Reimbursement');
+			submit.addEventListener("click", () => {alert("This reimbursement was successfully updated!")})
 			document.getElementById('lab7').appendChild(submit);
 		}
 	}
